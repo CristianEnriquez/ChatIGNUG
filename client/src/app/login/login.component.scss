@@ -1,0 +1,49 @@
+.login-page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+    background-image: url('../../assets/images/background.jpg');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    text-align: center;
+    padding: 3em;
+}
+
+.input-lg {
+    height: 46px;
+    padding: 10px;
+    font-size: 18px;
+    line-height: 1.3333333;
+    border-radius: 0;
+}
+
+.pretty-form {
+    background-color:rgba(255,255,255,0.5);
+    padding:40px;
+    border-radius: 25px;
+}
+
+.input-underline {
+    background: 0 0;
+    border: none;
+    box-shadow: none;
+    border-bottom: 2px solid silver;
+    color: gray;
+    border-radius: 0;
+}
+.input-underline:focus {
+    border-bottom: 2px solid black;
+    color:black;
+    box-shadow: none;
+}
+
+.input-underline:hover {
+    border-bottom: 2px solid gray;
+    color:black;
+    box-shadow: none;
+}

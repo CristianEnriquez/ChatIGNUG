@@ -1,0 +1,970 @@
+<div class="container-fluid">
+    <div class="form-group row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+            <img src="{{srcFoto}}" class="rounded-circle" width="150px" (click)="fileInput.click()">
+            <input type="file" id="foto" placeholder="Fotografía" #fileInput
+                   (change)="CodificarArchivo($event)" accept="image/*">
+        </div>
+    </div>
+    <div class="form-group row">
+        <div style="width: 100%; text-align:center;">
+            <div>
+                <button type="button" class="btn btn-primary" (click)="update()">
+                    <span class="fa fa-refresh"></span>&nbsp;Actualizar
+                </button>
+                <button type="button" class="btn btn-info" routerLink="/formulario-datos">
+                    <span class="fa fa-eye"></span>&nbsp;Ver Formulario
+                </button>
+            </div>
+        </div>
+    </div>
+    <ngb-tabset>
+        <ngb-tab title="1. Datos Personales" id="tab1">
+            <ng-template ngbTabContent>
+                <div class="row mt-2">
+                    <div class="col-lg-6">
+                        <div class="form-group row">
+                            <div class="col-lg-5">
+                                <label class="col-form-label">Tipo Identificación:</label>
+                            </div>
+                            <div class="col-lg-7">
+                                <select class="form-control" id="idTipoDocumento" name="idTipoDocumento"
+                                        [(ngModel)]="personaLogeada.idTipoDocumento">
+                                    <option value="" selected>Seleccione...</option>
+                                    <option *ngFor="let tipoDocumento of tiposDocumentos" value={{tipoDocumento.id}}>
+                                        {{tipoDocumento.descripcion}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-5">
+                                <label class="col-form-label">Identificación:</label>
+                            </div>
+                            <div class="col-lg-7">
+                                <input type="text" class="form-control" id="identificacion" placeholder="Identificación"
+                                       [(ngModel)]="personaLogeada.identificacion" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-5">
+                                <label class="col-form-label">Primer Nombre:</label>
+                            </div>
+                            <div class="col-lg-7">
+                                <input type="text" class="form-control" id="primerNombre" placeholder="Primer Nombre"
+                                       [(ngModel)]="personaLogeada.nombre1">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-5">
+                                <label class="col-form-label">Segundo Nombre:</label>
+                            </div>
+                            <div class="col-lg-7">
+                                <input type="text" class="form-control" id="segundoNombre" placeholder="Segundo Nombre"
+                                       [(ngModel)]="personaLogeada.nombre2">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-5">
+                                <label class="col-form-label">Primer Apellido:</label>
+                            </div>
+                            <div class="col-lg-7">
+                                <input type="text" class="form-control" id="primerApellido"
+                                       placeholder="Primer Apellido"
+                                       [(ngModel)]="personaLogeada.apellido1">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-5">
+                                <label class="col-form-label">Segundo Apellido:</label>
+                            </div>
+                            <div class="col-lg-7">
+                                <input type="text" class="form-control" id="segundoApellido"
+                                       placeholder="Segundo Apellido"
+                                       [(ngModel)]="personaLogeada.apellido2">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-5">
+                                <label class="col-form-label">Fecha de Nacimiento:</label>
+                            </div>
+                            <div class="col-lg-7">
+                                <input type="date" class="form-control" id="fechaNacimiento" (keypress)="false"
+                                       [ngModel]="personaLogeada.fechaNacimiento | date:'y-MM-dd'"
+                                       (ngModelChange)="personaLogeada.fechaNacimiento = $event">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-5">
+                                <label class="col-form-label">Número de Hijos:</label>
+                            </div>
+                            <div class="col-lg-7">
+                                <input type="number" class="form-control" id="numeroHijos" placeholder="Número de Hijos"
+                                       [(ngModel)]="personaLogeada.numeroHijos">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-5">
+                                <label class="col-form-label">Categoría Migratoria - (SOLO EXTRANJEROS):</label>
+                            </div>
+                            <div class="col-lg-7">
+                                <select class="form-control" id="idCategoriaMigratoria" name="idCategoriaMigratoria"
+                                        [(ngModel)]="personaLogeada.idCategoriaMigratoria">
+                                    <option value="" selected>Seleccione...</option>
+                                    <option *ngFor="let categoriamigratoria of categoriasmigratorias"
+                                            value={{categoriamigratoria.id}}>
+                                        {{categoriamigratoria.descripcion}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group row">
+                            <div class="col-lg-5">
+                                <label class="col-form-label">Teléfono Celular:</label>
+                            </div>
+                            <div class="col-lg-7">
+                                <input type="text" class="form-control" id="telefonoCelular"
+                                       placeholder="Teléfono Celular"
+                                       [(ngModel)]="personaLogeada.telefonoCelular">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-5">
+                                <label class="col-form-label">Teléfono Domicilio:</label>
+                            </div>
+                            <div class="col-lg-7">
+                                <input type="text" class="form-control" id="telefonoDomicilio"
+                                       placeholder="Teléfono Domicilio"
+                                       [(ngModel)]="personaLogeada.telefonoDomicilio">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-5">
+                                <label class="col-form-label">Correo Electrónico Institucional:</label>
+                            </div>
+                            <div class="col-lg-7">
+                                <input type="email" class="form-control" id="correoElectronicoInstitucional"
+                                       placeholder="Correo Electrónico Institucional" readonly
+                                       [(ngModel)]="personaLogeada.correoElectronicoInstitucional">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-5">
+                                <label class="col-form-label">Correo Electrónico Personal:</label>
+                            </div>
+                            <div class="col-lg-7">
+                                <input type="email" class="form-control" id="correoElectronicoPersonal"
+                                       placeholder="Correo Electrónico Personal"
+                                       [(ngModel)]="personaLogeada.correoElectronicoPersonal">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-5">
+                                <label class="col-form-label">Género:</label>
+                            </div>
+                            <div class="col-lg-7">
+                                <select class="form-control" id="idGenero" name="idGenero"
+                                        [(ngModel)]="personaLogeada.idGenero">
+                                    <option value="" selected>Seleccione...</option>
+                                    <option *ngFor="let genero of generos" value={{genero.id}}>{{genero.descripcion}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-5">
+                                <label class="col-form-label">Identificación Étnica:</label>
+                            </div>
+                            <div class="col-lg-7">
+                                <select class="form-control" id="idEtnia" name="idEtnia"
+                                        [(ngModel)]="personaLogeada.idEtnia">
+                                    <option value="" selected>Seleccione...</option>
+                                    <option *ngFor="let etnia of etnias" value={{etnia.id}}>{{etnia.descripcion}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-5">
+                                <label class="col-form-label">¿Habla algún idioma ancestral?</label>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="input-group">
+                                    <label *ngIf="!hablaIdiomaAncestral" class="mr-2">NO</label>
+                                    <label class="switch">
+                                        <input type="checkbox" id="hablaIdiomaAncestral"
+                                               [(ngModel)]="hablaIdiomaAncestral"
+                                               (click)="HablaIdiomaAncestral()">
+                                        <span class="slider round"></span>
+                                    </label>
+                                    <label *ngIf="hablaIdiomaAncestral" class="ml-2">SI</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container-fluid" [hidden]="!hablaIdiomaAncestral">
+                            <div class="form-group row">
+                                <div class="col-lg-5">
+                                    <label class="col-form-label">Idioma Ancestral Hablado:</label>
+                                </div>
+                                <div class="col-lg-7">
+                                    <input type="text" class="form-control" id="especifiqueIdiomaAncestral"
+                                           placeholder="Especifíque el Idioma Ancestral que Habla"
+                                           [(ngModel)]="personaLogeada.idiomaAncestral">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-5">
+                                <label class="col-form-label">Estado Civil:</label>
+                            </div>
+                            <div class="col-lg-7">
+                                <select class="form-control" id="idEstadoCivil" name="idEstadoCivil"
+                                        [(ngModel)]="personaLogeada.idEstadoCivil">
+                                    <option value="" selected>Seleccione...</option>
+                                    <option *ngFor="let estadoCivil of estadosCivil" value={{estadoCivil.id}}>
+                                        {{estadoCivil.descripcion}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-5">
+                                <label class="col-form-label">Tipo de Sangre:</label>
+                            </div>
+                            <div class="col-lg-7">
+                                <select class="form-control" id="idTipoSangre" name="idTipoSangre"
+                                        [(ngModel)]="personaLogeada.idTipoSangre">
+                                    <option value="" selected>Seleccione...</option>
+                                    <option *ngFor="let tipoSangre of tiposSangre" value={{tipoSangre.id}}>
+                                        {{tipoSangre.descripcion}}
+                                    </option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </ngb-tab>
+
+        <ngb-tab title="2. Ubicación" id="tab2">
+            <ng-template ngbTabContent>
+                <div class="row mt-2">
+                    <div class="col-lg-6">
+                        <div class="form-group row">
+                            <div class="col-lg-5">
+                                <label class="col-form-label">País Domicilio:</label>
+                            </div>
+                            <div class="col-lg-7">
+                                <select class="form-control" id="idPaisDomicilio" name="idPaisDomicilio"
+                                        [(ngModel)]="personaLogeada.idUbicacionDomicilioPais"
+                                        (change)="getProvinciasDomicilio()">
+                                    <option value="" selected>Seleccione...</option>
+                                    <option *ngFor="let pais of paises" value={{pais.codigo}}>{{pais.descripcion}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row ">
+                            <div class="col-lg-5">
+                                <label class="col-form-label">Provincia Domicilio:</label>
+                            </div>
+                            <div class="col-lg-7">
+                                <select class="form-control" id="idProvinciaDomicilio" name="idProvinciaDomicilio"
+                                        [(ngModel)]="personaLogeada.idUbicacionDomicilioProvincia"
+                                        (change)="getCantonesDomicilio()">
+                                    <option value="" selected>Seleccione...</option>
+                                    <option *ngFor="let privincia of provinciasDomicilio" value={{privincia.codigo}}>
+                                        {{privincia.descripcion}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row ">
+                            <div class="col-lg-5">
+                                <label class="col-form-label">Cantón Domicilio:</label>
+                            </div>
+                            <div class="col-lg-7">
+                                <select class="form-control" id="idCantonDomicilio" name="idCantonDomicilio"
+                                        [(ngModel)]="personaLogeada.idUbicacionDomicilioCanton"
+                                        (change)="getParroquiasDomicilio()">
+                                    <option value="" selected>Seleccione...</option>
+                                    <option *ngFor="let canton of cantonesDomicilio" value={{canton.codigo}}>
+                                        {{canton.descripcion}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row ">
+                            <div class="col-lg-5">
+                                <label class="col-form-label">Parroquia Domicilio:</label>
+                            </div>
+                            <div class="col-lg-7">
+                                <select class="form-control" id="idParroquiaDomicilio" name="idParroquiaDomicilio"
+                                        [(ngModel)]="personaLogeada.idUbicacionDomicilioParroquia">
+                                    <option value="" selected>Seleccione...</option>
+                                    <option *ngFor="let parroquia of parroquiasDomicilio" value={{parroquia.codigo}}>
+                                        {{parroquia.descripcion}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row ">
+                            <div class="col-lg-5">
+                                <label class="col-form-label">Dirección Domicilio:</label>
+                            </div>
+                            <div class="col-lg-7">
+                                <input type="text" class="form-control" id="idDireccionDomicilio"
+                                       placeholder="Dirección Domicilio"
+                                       [(ngModel)]="personaLogeada.direccionDomicilio">
+                            </div>
+                        </div>
+                        <div class="form-group row ">
+                            <div class="col-lg-5">
+                                <label class="col-form-label">Código Postal:</label>
+                            </div>
+                            <div class="col-lg-7">
+                                <input type="text" class="form-control" id="codigoPostal" placeholder="Código Postal"
+                                       [(ngModel)]="personaLogeada.codigoPostal">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group row ">
+                            <div class="col-lg-5">
+                                <label class="col-form-label">País Nacimiento:</label>
+                            </div>
+                            <div class="col-lg-7">
+                                <select class="form-control" id="idPaisNacimiento" name="idPaisNacimiento"
+                                        [(ngModel)]="personaLogeada.idUbicacionNacimientoPais"
+                                        (change)="getProvinciasNacimiento()">
+                                    <option value="" selected>Seleccione...</option>
+                                    <option *ngFor="let pais of paises" value={{pais.codigo}}>{{pais.descripcion}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row ">
+                            <div class="col-lg-5">
+                                <label class="col-form-label">Provincia Nacimiento:</label>
+                            </div>
+                            <div class="col-lg-7">
+                                <select class="form-control" id="idProvinciaNacimiento" name="idProvinciaNacimiento"
+                                        [(ngModel)]="personaLogeada.idUbicacionNacimientoProvincia"
+                                        (change)="getCantonesNacimiento()">
+                                    <option value="" selected>Seleccione...</option>
+                                    <option *ngFor="let privincia of provinciasNacimiento" value={{privincia.codigo}}>
+                                        {{privincia.descripcion}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row ">
+                            <div class="col-lg-5">
+                                <label class="col-form-label">Cantón Nacimiento:</label>
+                            </div>
+                            <div class="col-lg-7">
+                                <select class="form-control" id="idCantonNacimiento" name="idCantonNacimiento"
+                                        [(ngModel)]="personaLogeada.idUbicacionNacimientoCanton"
+                                        (change)="getParroquiasNacimiento()">
+                                    <option value="" selected>Seleccione...</option>
+                                    <option *ngFor="let canton of cantonesNacimiento" value={{canton.codigo}}>
+                                        {{canton.descripcion}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row ">
+                            <div class="col-lg-5">
+                                <label class="col-form-label">Parroquia Nacimiento:</label>
+                            </div>
+                            <div class="col-lg-7">
+                                <select class="form-control" id="idParroquiaNacimiento" name="idParroquiaNacimiento"
+                                        [(ngModel)]="personaLogeada.idUbicacionNacimientoParroquia">
+                                    <option value="" selected>Seleccione...</option>
+                                    <option *ngFor="let parroquia of parroquiasNacimiento" value={{parroquia.codigo}}>
+                                        {{parroquia.descripcion}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </ngb-tab>
+
+        <ngb-tab title="3. Información Familiar" id="tab3">
+            <ng-template ngbTabContent>
+                <div class="row mt-2">
+                    <div class="col-lg-6">
+                        <div class="form-group row">
+                            <div class="col-lg-6">
+                                <label class="col-form-label">Contacto de Emergencia:</label>
+                            </div>
+                            <div class="col-lg-6">
+                                <input type="text" class="form-control" id="contactoEmergencia"
+                                       placeholder="Apellidos - Nombres"
+                                       [(ngModel)]="personaLogeada.nombreContactoEmergencia">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-6">
+                                <label class="col-form-label">Parentesco - Contacto Emergencia:</label>
+                            </div>
+                            <div class="col-lg-6">
+                                <input type="text" class="form-control" id="parentescoContactoEmergencia"
+                                       placeholder="Parentesco del Contacto de Emergencia"
+                                       [(ngModel)]="personaLogeada.parentescoContactoEmergencia">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-6">
+                                <label class="col-form-label">Teléfono - Contacto Emergencia:</label>
+                            </div>
+                            <div class="col-lg-6">
+                                <input type="text" class="form-control" id="telefonoContactoEmergencia"
+                                       placeholder="Teléfono del Contacto de Emergencia"
+                                       [(ngModel)]="personaLogeada.telefonoContactoEmergencia">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-6">
+                                <label class="col-form-label">Ingresos Familiares:</label>
+                            </div>
+                            <div class="col-lg-6">
+                                <select class="form-control" id="idIngresosFamiliares" name="idIngresosFamiliares"
+                                        [(ngModel)]="personaLogeada.idIngresos">
+                                    <option value="" selected>Seleccione...</option>
+                                    <option *ngFor="let tipoIngresos of tiposIngresos" value={{tipoIngresos.id}}>
+                                        {{tipoIngresos.descripcion}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-6">
+                                <label class="col-form-label">Número de Miembros en el Hogar:</label>
+                            </div>
+                            <div class="col-lg-6">
+                                <input type="number" class="form-control" id="numeroMiembrosHogar"
+                                       placeholder="Número de Miembros en el Hogar"
+                                       [(ngModel)]="personaLogeada.miembrosHogar">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-6">
+                                <label class="col-form-label">¿Usted o algún miembro de la familia recibe el Bono de
+                                    Desarrollo Humano?</label>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="input-group">
+                                    <label *ngIf="!bonoDesarrolloHumano" class="mr-2">NO</label>
+                                    <label class="switch">
+                                        <input type="checkbox" id="bonoDesarrolloHumano"
+                                               [(ngModel)]="bonoDesarrolloHumano"
+                                               (click)="BonoDesarrolloHumano()">
+                                        <span class="slider round"></span>
+                                    </label>
+                                    <label *ngIf="bonoDesarrolloHumano" class="ml-2">SI</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group row">
+                            <div class="col-lg-6">
+                                <label class="col-form-label">Nombre de la Madre:</label>
+                            </div>
+                            <div class="col-lg-6">
+                                <input type="text" class="form-control" id="nombreMadre"
+                                       placeholder="Nombre de la Madre"
+                                       [(ngModel)]="personaLogeada.nombreMadre">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-6">
+                                <label class="col-form-label">Nacionalidad de la Madre:</label>
+                            </div>
+                            <div class="col-lg-6">
+                                <select class="form-control" id="nacionalidadMadre" name="nacionalidadMadre"
+                                        [(ngModel)]="personaLogeada.paisOrigenMadre">
+                                    <option value="" selected>Seleccione...</option>
+                                    <option *ngFor="let pais of paises" value={{pais.codigo}}>{{pais.descripcion}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-6">
+                                <label class="col-form-label">Nivel de Estudios de la Madre:</label>
+                            </div>
+                            <div class="col-lg-6">
+                                <select class="form-control" id="estudiosMadre" name="estudiosMadre"
+                                        [(ngModel)]="personaLogeada.idNivelEstudioMadre">
+                                    <option value="" selected>Seleccione...</option>
+                                    <option *ngFor="let nivelTitulo of nivelesTitulo" value={{nivelTitulo.id}}>
+                                        {{nivelTitulo.descripcion}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-6">
+                                <label class="col-form-label">Nombre del Padre:</label>
+                            </div>
+                            <div class="col-lg-6">
+                                <input type="text" class="form-control" id="nombrePadre" placeholder="Nombre del Padre"
+                                       [(ngModel)]="personaLogeada.nombrePadre">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-6">
+                                <label class="col-form-label">Nacionalidad del Padre:</label>
+                            </div>
+                            <div class="col-lg-6">
+                                <select class="form-control" id="nacionalidadPadre" name="nacionalidadPadre"
+                                        [(ngModel)]="personaLogeada.paisOrigenPadre">
+                                    <option value="" selected>Seleccione...</option>
+                                    <option *ngFor="let pais of paises" value={{pais.codigo}}>{{pais.descripcion}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-6">
+                                <label class="col-form-label">Nivel de Estudios del Padre:</label>
+                            </div>
+                            <div class="col-lg-6">
+                                <select class="form-control" id="estudiosPadre" name="estudiosPadre"
+                                        [(ngModel)]="personaLogeada.idNivelEstudioPadre">
+                                    <option value="" selected>Seleccione...</option>
+                                    <option *ngFor="let nivelTitulo of nivelesTitulo" value={{nivelTitulo.id}}>
+                                        {{nivelTitulo.descripcion}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </ngb-tab>
+
+        <ngb-tab title="4. Datos Postulación" id="tab4">
+            <ng-template ngbTabContent>
+                <div class="row mt-2">
+                    <div class="col-lg-6">
+                        <div class="form-group row">
+                            <div class="col-lg-5">
+                                <label class="col-form-label">¿Cuál es su ocupación?</label>
+                            </div>
+                            <div class="col-lg-7">
+                                <select class="form-control" id="idOcupacion" name="idOcupacion"
+                                        [(ngModel)]="personaLogeada.idOcupacion">
+                                    <option value="" selected>Seleccione...</option>
+                                    <option *ngFor="let ocupacion of ocupaciones" value={{ocupacion.id}}>
+                                        {{ocupacion.descripcion}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div [hidden]="!esEstudiante">
+                            <div class="form-group row">
+                                <div class="col-lg-5">
+                                    <label class="col-form-label">Tipo de Colegio:</label>
+                                </div>
+                                <div class="col-lg-7">
+                                    <select class="form-control" id="idTipoInstitucion" name="idTipoInstitucion"
+                                            [(ngModel)]="estudiante.idTipoInstitucionProcedencia">
+                                        <option value="" selected>Seleccione...</option>
+                                        <option *ngFor="let tipoInstitucionProcedencia of tiposInstitucionProcedencia"
+                                                value={{tipoInstitucionProcedencia.id}}>
+                                            {{tipoInstitucionProcedencia.descripcion}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-5">
+                                    <label class="col-form-label">Tipo de Bachillerato:</label>
+                                </div>
+                                <div class="col-lg-7">
+                                    <select class="form-control" id="idTipoBachillerato" name="idTipoBachillerato"
+                                            [(ngModel)]="estudiante.idTipoBachillerato">
+                                        <option value="" selected>Seleccione...</option>
+                                        <option *ngFor="let tipoBachillerato of tiposBachilleratos"
+                                                value={{tipoBachillerato.id}}>
+                                            {{tipoBachillerato.descripcion}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-5">
+                                    <label class="col-form-label">Nota de Postulación:</label>
+                                </div>
+                                <div class="col-lg-7">
+                                    <input type="number" class="form-control" id="notaPostulación"
+                                           placeholder="Nota de Postulación"
+                                           [(ngModel)]="estudiante.notaPostulacion">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-5">
+                                    <label class="col-form-label">Año de Graduación:</label>
+                                </div>
+                                <div class="col-lg-7">
+                                    <input type="number" class="form-control" id="anoGraduacion"
+                                           placeholder="Año de Graduación"
+                                           [(ngModel)]="estudiante.anoGraduacion">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-5">
+                                    <label class="col-form-label">Fecha de Inicio de Carrera:</label>
+                                </div>
+                                <div class="col-lg-7">
+                                    <input type="date" class="form-control" id="fechaInicioCarrera" (keypress)="false"
+                                           [ngModel]="estudiante.fechaInicioCarrrera | date:'y-MM-dd'"
+                                           (ngModelChange)="estudiante.fechaInicioCarrrera = $event">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-5">
+                                    <label class="col-form-label">Fecha de Matrícula:</label>
+                                </div>
+                                <div class="col-lg-7">
+                                    <input type="date" class="form-control" id="fechaMatricula" (keypress)="false"
+                                           [ngModel]="cupo.fecha | date:'y-MM-dd'"
+                                           (ngModelChange)="cupo.fecha = $event">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-5">
+                                    <label class="col-form-label">Tipo de Matrícula:</label>
+                                </div>
+                                <div class="col-lg-7">
+                                    <select class="form-control" id="idTipoMatricula" name="idTipoMatricula"
+                                            [(ngModel)]="cupo.idTipoMatricula">
+                                        <option value="" selected>Seleccione...</option>
+                                        <option *ngFor="let tipo of tiposMatricula" value={{tipo.id}}>
+                                            {{tipo.descripcion}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-5">
+                                    <label class="col-form-label">Nivel Académico:</label>
+                                </div>
+                                <div class="col-lg-7">
+                                    <select class="form-control" id="idNivelAcademico" name="idNivelAcademico"
+                                            [(ngModel)]="cupo.nivel">
+                                        <option value="" selected>Seleccione...</option>
+                                        <option value="1" selected>Primero</option>
+                                        <option value="2" selected>Segundo</option>
+                                        <option value="3" selected>Tercero</option>
+                                        <option value="4" selected>Cuarto</option>
+                                        <option value="5" selected>Quinto</option>
+                                        <option value="6" selected>Sexto</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-5">
+                                    <label class="col-form-label">Paralelo:</label>
+                                </div>
+                                <div class="col-lg-7">
+                                    <input type="text" class="form-control" id="paralelo" placeholder="Paralelo [A - Z]"
+                                           [(ngModel)]="cupo.paralelo">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div [hidden]="!esEstudiante">
+                            <div class="form-group row">
+                                <div class="col-lg-6">
+                                    <label class="col-form-label">¿Posee Título de Educación Superior?</label>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="input-group">
+                                        <label *ngIf="!poseeTituloEducacionSuperior" class="mr-2">NO</label>
+                                        <label class="switch">
+                                            <input type="checkbox" id="poseeTituloEducacionSuperior"
+                                                   [(ngModel)]="poseeTituloEducacionSuperior"
+                                                   (click)="PoseeTituloEducacionSuperior()">
+                                            <span class="slider round"></span>
+                                        </label>
+                                        <label *ngIf="poseeTituloEducacionSuperior" class="ml-2">SI</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container-fluid" [hidden]="!poseeTituloEducacionSuperior">
+                                <div class="form-group row">
+                                    <div class="col-lg-6">
+                                        <label class="col-form-label">Título de Educación Superior:</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" id="especifiqueTituloEducacionSuperior"
+                                               placeholder="Título de Educación Superior"
+                                               [(ngModel)]="estudiante.tituloEducacionSuperior">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-6">
+                                    <label class="col-form-label">¿Tiene Carnet CONADIS?</label>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="input-group">
+                                        <label *ngIf="!tieneDiscapacidad" class="mr-2">NO</label>
+
+                                        <label class="switch">
+                                            <input type="checkbox" id="carnetConadis" [(ngModel)]="tieneDiscapacidad"
+                                                   (click)="TieneDiscapacidad()">
+                                            <span class="slider round"></span>
+                                        </label>
+                                        <label *ngIf="tieneDiscapacidad" class="ml-2">SI</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container-fluid" [hidden]="!tieneDiscapacidad">
+                                <div class="form-group row">
+                                    <div class="col-lg-6">
+                                        <label class="col-form-label">Número de Carnet de CONADIS:</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" id="numeroCarnetConadis"
+                                               placeholder="Número de Carnet de Conadis"
+                                               [(ngModel)]="personaLogeada.numeroCarnetConadis">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-lg-6">
+                                        <label class="col-form-label">Tipo de Discapacidad:</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <select class="form-control" id="idTipoDiscapacidad" name="idTipoDiscapacidad"
+                                                [(ngModel)]="personaLogeada.idTipoDiscapacidad">
+                                            <option value="" selected>Seleccione...</option>
+                                            <option *ngFor="let tipoDiscapacidad of tiposDiscapacidad"
+                                                    value={{tipoDiscapacidad.id}}>
+                                                {{tipoDiscapacidad.descripcion}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-lg-6">
+                                        <label class="col-form-label">Porcentaje de Discapacidad:</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input type="number" class="form-control" id="porcentajeDiscapacidad"
+                                               placeholder="Porcentaje de Discapacidad"
+                                               [(ngModel)]="personaLogeada.porcentajeDiscapacidad">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-6">
+                                    <label class="col-form-label">¿Ha repetido al menos una materia?</label>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="input-group">
+                                        <label *ngIf="!perdidoMateria" class="mr-2">NO</label>
+                                        <label class="switch">
+                                            <input type="checkbox" id="perdidoMateria" [(ngModel)]="perdidoMateria"
+                                                   (click)="PerdidoMateria()">
+                                            <span class="slider round"></span>
+                                        </label>
+                                        <label *ngIf="perdidoMateria" class="ml-2">SI</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-6">
+                                    <label class="col-form-label">¿Ha Perdido la Gratuidad?</label>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="input-group">
+                                        <label *ngIf="!perdidoGratuidad" class="mr-2">NO</label>
+                                        <label class="switch">
+                                            <input type="checkbox" id="perdidoGratuidad" [(ngModel)]="perdidoGratuidad"
+                                                   (click)="PerdidoGratuidad()">
+                                            <span class="slider round"></span>
+                                        </label>
+                                        <label *ngIf="perdidoGratuidad" class="ml-2">SI</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-6">
+                                    <label class="col-form-label">¿Ha Realizado Prácticas Preprofesionales?</label>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="input-group">
+                                        <label *ngIf="!practicasPreprofesionales" class="mr-2">NO</label>
+                                        <label class="switch">
+                                            <input type="checkbox" id="practicasPreprofesionales"
+                                                   [(ngModel)]="practicasPreprofesionales"
+                                                   (click)="PracticasPreprofesionales()">
+                                            <span class="slider round"></span>
+                                        </label>
+                                        <label *ngIf="practicasPreprofesionales" class="ml-2">SI</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container-fluid" [hidden]="!practicasPreprofesionales">
+                                <div class="form-group row">
+                                    <div class="col-lg-6">
+                                        <label class="col-form-label">Horas de Prácticas Preprofesionales
+                                            Realizadas:</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" id="horasPracticasPreprofesionales"
+                                               placeholder="Horas de Prácticas Preprofesionales Realizadas"
+                                               [(ngModel)]="estudiante.horasPracticasPreprofesionales">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-lg-6">
+                                        <label class="col-form-label">Tipo de Institución Prácticas
+                                            Preprofesionales:</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <select class="form-control" id="idTipoInstitucionPracticasPreprofesionales"
+                                                name="idTipoInstitucionPracticasPreprofesionales"
+                                                [(ngModel)]="estudiante.idTipoInstitucionPracticasPreprofesionales">
+                                            <option value="" selected>Seleccione...</option>
+                                            <option
+                                                *ngFor="let tipoInstitucion of tiposInstitucionesPracticasPreprofesionales"
+                                                value={{tipoInstitucion.id}}>{{tipoInstitucion.descripcion}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-lg-6">
+                                        <label class="col-form-label">Sector Económico de la Institución Prácticas
+                                            Preprofesionales:</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <select class="form-control"
+                                                id="idSectorEconomicoInstitucionPracticasPreprofesionales"
+                                                name="idSectorEconomicoInstitucionPracticasPreprofesionales"
+                                                [(ngModel)]="estudiante.idSectorEconomicoPracticasPreprofesionales">
+                                            <option value="" selected>Seleccione...</option>
+                                            <option
+                                                *ngFor="let sectorEconomicoInstitucion of sectoresEconomicosPracticasPreprofesionales"
+                                                value={{sectorEconomicoInstitucion.id}}>
+                                                {{sectorEconomicoInstitucion.descripcion}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-6">
+                                    <label class="col-form-label">¿Ha participado en algún Proyecto de Vinculación con
+                                        la
+                                        Sociedad en el Instituto?</label>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="input-group">
+                                        <label *ngIf="!vinculacionSociedadInstituto" class="mr-2">NO</label>
+                                        <label class="switch">
+                                            <input type="checkbox" id="vinculacionSociedadInstituto"
+                                                   [(ngModel)]="vinculacionSociedadInstituto"
+                                                   (click)="VinculacionSociedadInstituto()">
+                                            <span class="slider round"></span>
+                                        </label>
+                                        <label *ngIf="vinculacionSociedadInstituto" class="ml-2">SI</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container-fluid" [hidden]="!vinculacionSociedadInstituto">
+                                <div class="form-group row">
+                                    <div class="col-lg-6">
+                                        <label class="col-form-label">Alcance del Proyecto de Vinculación con la
+                                            Sociedad:</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <select class="form-control" id="idAlcanceProyectoVinculacion"
+                                                name="idAlcanceProyectoVinculacion"
+                                                [(ngModel)]="estudiante.idAlcanceProyectoVinculacion">
+                                            <option value="" selected>Seleccione...</option>
+                                            <option *ngFor="let alcance of alcancesProyectosVinculacion"
+                                                    value={{alcance.id}}>
+                                                {{alcance.descripcion}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-6">
+                                    <label class="col-form-label">El Estudiante se encuentra eedicado a:</label>
+                                </div>
+                                <div class="col-lg-6">
+                                    <select class="form-control" id="idOcupacionEstudiante" name="idOcupacionEstudiante"
+                                            [(ngModel)]="estudiante.idOcupacionEstudiante">
+                                        <option value="" selected>Seleccione...</option>
+                                        <option *ngFor="let ocupacion of ocupacionesEstudiante" value={{ocupacion.id}}>
+                                            {{ocupacion.descripcion}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="container-fluid" [hidden]="!(estudiante.idOcupacionEstudiante==2)">
+                                <div class="form-group row">
+                                    <div class="col-lg-6">
+                                        <label class="col-form-label">Nombre de la Empresa donde Trabaja:</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" id="nombreEmpresaTrabaja"
+                                               placeholder="Nombre de la Empresa donde Trabaja"
+                                               [(ngModel)]="estudiante.nombreEmpresaTrabaja">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-lg-6">
+                                        <label class="col-form-label">Área de Trabajo de la Empresa:</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <select class="form-control" id="idAreaTrabajoEmpresa"
+                                                name="idAreaTrabajoEmpresa"
+                                                [(ngModel)]="estudiante.idAreaEmpresaTrabaja">
+                                            <option value="" selected>Seleccione...</option>
+                                            <option *ngFor="let area of areasTrabajoEmpresa" value={{area.id}}>
+                                                {{area.descripcion}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-lg-6">
+                                        <label class="col-form-label">Destino Recursos Económicos del
+                                            Estudiante:</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <select class="form-control" id="idDestinoRecursosEstudiante"
+                                                name="idDestinoRecursosEstudiante"
+                                                [(ngModel)]="estudiante.idDestinoRecursosEstudiante">
+                                            <option value="" selected>Seleccione...</option>
+                                            <option *ngFor="let destino of destinosRecursosEstudiante"
+                                                    value={{destino.id}}>
+                                                {{destino.descripcion}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </ngb-tab>
+    </ngb-tabset>
+</div>

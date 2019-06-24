@@ -1,0 +1,118 @@
+<!--Ventana de chat -->
+<div *ngIf="cerrar == false" class="chatarea">
+    <!-- Botones de ventana de chat -->
+    <div class="col-12 text-right m-2">
+
+        <div class="btn-group m-2" role="group" aria-label="Basic example">
+
+            <a href="#mostrarUltimo" class="btn btn-sm btn-info" #refresh>
+                <i class="fa fa-refresh"></i>
+            </a>
+            <button *ngIf="minimizar == false" type="button" class="btn btn-sm btn-warning" (click)="botonMinimizar()">
+                <i class="fa fa-window-minimize"></i>
+            </button>
+            <button *ngIf="minimizar == true" type="button" class="btn btn-sm btn-warning" (click)="botonMaximizar()">
+                <i class="fa fa-window-maximize "></i>
+            </button>
+            <button type="button" class="btn btn-sm btn-danger" (click)="botonCerrar()">
+                <i class="fa fa-close"></i>
+            </button>
+        </div>
+        <br />
+        <div style="text-align: center ">
+
+            <strong style="color:white;">{{ userName }}</strong>
+        </div>
+    </div>
+    <!-- Area de chat -->
+    <div *ngIf="minimizar == false" class="col-12">
+        <div class="col-12">
+            <div class="row">
+                <div class="chat-message-box" style="overflow-y: auto; overflow-x: hidden; ">
+
+                    <div class="cuadroMensajes">
+                        <!-- Mensajes de chat -->
+                        <div *ngFor="let message of messages">
+                            <div *ngIf="message.nombre == userName" class="bubble-me">
+                                <div class="col-6 writter">
+                                    <strong>{{ message.nombre }}</strong>
+                                </div>
+                                <div class="col-6 writter">
+                                    {{ message.fecha | date: "medium" }}
+                                </div>
+                                <div class="col-12 text-justify">
+                                    {{ message.mensaje }}
+                                </div>
+                                <div class="col-12 text-justify">
+                                    <div *ngIf="message.adjunto">
+                                        <div *ngIf="message.tipo.split('/')[0] === 'image'">
+                                            <span (click)="downloadFile(message.adjunto, message.tipo, message.nomDoc)">
+                                                <img src="data:{{message.tipo}};base64,{{ message.adjunto}}" style="width: 100%"
+                                                    alt="" />
+                                            </span>
+                                        </div>
+                                        <div *ngIf="message.tipo.split('/')[0] !== 'image'">
+                                            <span (click)="downloadFile(message.adjunto, message.tipo, message.nomDoc)">
+                                                <img src="assets/google_docs-logo2.jpg" style="width: 100%" />
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="message.nombre != userName" class="bubble-others">
+                                <div class="col-6 writter">
+                                    <strong>{{ message.nombre }}</strong>
+                                </div>
+                                <div class="col-6 writter">
+                                    {{ message.fecha | date: "medium" }}
+                                </div>
+                                <div class="col-12 text-justify">
+                                    {{ message.mensaje }}
+                                </div>
+                                <div class="col-12 text-justify">
+                                    <div *ngIf="message.adjunto">
+                                        <div *ngIf="message.tipo.split('/')[0] === 'image'">
+                                            <span (click)="downloadFile(message.adjunto, message.tipo, message.nomDoc)">
+                                                <img src="data:{{message.tipo}};base64,{{ message.adjunto}}" style="width: 100%"
+                                                    alt="" />
+                                            </span>
+                                        </div>
+                                        <div *ngIf="message.tipo.split('/')[0] !== 'image'">
+                                            <span (click)="downloadFile(message.adjunto, message.tipo, message.nomDoc)">
+                                                <img src="assets/google_docs-logo2.jpg" style="width: 100%" />
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- Elementos de pie de chat -->
+        <div class="col-12">
+            <div class="row">
+                <input type="text" class="form-control" placeholder="Escriba su mensaje" [(ngModel)]="message" />
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="row mt-1">
+                <div class="col-6">
+                    <button type="button" class="btn btn-success col-12" (click)="sendMessage()">
+                        <i class="fa fa-fw fa-send"></i>
+                    </button>
+                </div>
+                <div class="col-6">
+                    <input type="file" ion-button block color="dark" id="foto" placeholder="Fotografía" #fileInput
+                        (change)="CodificarArchivo($event)" accept="*" [hidden]="true" />
+                    <button type="button" class="btn btn-primary col-12" (click)="addAttachFile()">
+                        <i class="fa fa-paperclip"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

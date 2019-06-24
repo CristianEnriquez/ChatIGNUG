@@ -1,0 +1,1224 @@
+<div class="container-fluid">
+    <div class="form-group row">
+        <div style="width: 100%; text-align:center;">
+            <div>
+                <button type="button" class="btn btn-primary" (click)="imprimir()">
+                    <span class="fa fa-print"></span>&nbsp;Imprimir
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12"
+             style="background: white; border: 1px #D3D3D3 solid; box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);">
+            <div #encabezadoFormularioDatos class="row m-2">
+                <div class="col-11">
+                    <div class="form-group row">
+                        <div class="col-12 text-right">
+                            <ngx-barcode [bc-value]="barcode" [bc-display-value]="true"></ngx-barcode>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <img alt="INSTITUTOS SUPERIORES TÉCNICOS Y TECNOLÓGICOS" height="75px"
+                                 src="assets/images/logos/institutos.png"/>
+                        </div>
+                        <div class="col-6 text-center">
+                            <h4>SECRETARÍA DE FORMACIÓN TÉCNICA Y TECNOLÓGICA<br/><strong>{{datosInstituto.nombre}}<br/>(CÓDIGO:
+                                2203)</strong></h4>
+                            <div class="col-12 text-center mt-4">
+                                <h4><strong>FORMULARIO DE MATRÍCULA</strong></h4>
+                            </div>
+                        </div>
+                        <div class="col-3 text-right">
+                            <img alt="{{datosInstituto.nombre}}" height="100px" src="{{logo}}"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div #cuerpoFormularioDatosPG1 class="row m-2">
+                <div class="col-11">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td colspan="3">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>1. Tipo de Identificación</strong></label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="tipoIdentificacion"
+                                                                                [checked]="personaLogeada.idTipoDocumento == 1"
+                                                                                disabled>Cédula</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="tipoIdentificacion"
+                                                                                [checked]="personaLogeada.idTipoDocumento == 2"
+                                                                                disabled>Pasaporte</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>2. Número de Documento de
+                                            Identificación</strong></label>
+                                        {{personaLogeada.identificacion}}
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label ml-2"><strong>3. Sexo</strong></label>
+                                        <label class="radio-inline"><input type="radio" name="sexo"
+                                                                           [checked]="personaLogeada.idGenero == 1"
+                                                                           disabled>Hombre</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="sexo"
+                                                                                [checked]="personaLogeada.idGenero == 2"
+                                                                                disabled>Mujer</label>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label ml-2"><strong>4. Género</strong></label>
+                                        <label class="radio-inline"><input type="radio" name="genero"
+                                                                           [checked]="personaLogeada.idGenero == 1"
+                                                                           disabled>Masculino</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="genero"
+                                                                                [checked]="personaLogeada.idGenero == 2"
+                                                                                disabled>Femenino</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>5. Apellidos y Nombres del
+                                            Estudiante</strong></label>
+                                        {{personaLogeada.apellido1}}&nbsp;{{personaLogeada.apellido2}}&nbsp;{{personaLogeada.nombre1}}&nbsp;{{personaLogeada.nombre2}}
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>6. Correo Electrónico
+                                            Institucional</strong></label>
+                                        {{personaLogeada.correoElectronicoInstitucional}}
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>7. Nro. Celular</strong></label>
+                                        {{personaLogeada.telefonoCelular}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>8. Nro. Convencional</strong></label>
+                                        {{personaLogeada.telefonoDomicilio}}
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>9. Dirección</strong></label>
+                                        {{personaLogeada.direccionDomicilio}}
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>10. Código Postal</strong></label>
+                                        {{personaLogeada.codigoPostal}}
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>11. En caso de emergencia contactar a:
+                                            (Apellidos y Nombres)</strong></label>
+                                        {{personaLogeada.nombreContactoEmergencia}}
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>12. Parentesco</strong></label>
+                                        {{personaLogeada.parentescoContactoEmergencia}}
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>13. Nro. de Contacto</strong></label>
+                                        {{personaLogeada.telefonoContactoEmergencia}}
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>14. Identificación Étnica</strong></label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="etnia"
+                                                                                [checked]="!(personaLogeada.idEtnia == 4 || personaLogeada.idEtnia == 29 || personaLogeada.idEtnia == 30 || personaLogeada.idEtnia == 5 || personaLogeada.idEtnia == 26 || personaLogeada.idEtnia == 27 || personaLogeada.idEtnia == 31)"
+                                                                                disabled>Indígena</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="etnia"
+                                                                                [checked]="personaLogeada.idEtnia == 4"
+                                                                                disabled>Afroecuatoriano</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="etnia"
+                                                                                [checked]="personaLogeada.idEtnia == 29"
+                                                                                disabled>Negro</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="etnia"
+                                                                                [checked]="personaLogeada.idEtnia == 30"
+                                                                                disabled>Mulato</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="etnia"
+                                                                                [checked]="personaLogeada.idEtnia == 5"
+                                                                                disabled>Montuvio</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="etnia"
+                                                                                [checked]="personaLogeada.idEtnia == 26"
+                                                                                disabled>Mestizo</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="etnia"
+                                                                                [checked]="personaLogeada.idEtnia == 27"
+                                                                                disabled>Blanco</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="etnia"
+                                                                                [checked]="personaLogeada.idEtnia == 31"
+                                                                                disabled>Otro</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>15. En caso de escoger etnia
+                                            <i>Indígena</i> u <i>Otro</i> especifíque su nacionalidad:</strong></label>
+                                        {{etniaEspecifica}}
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>16. Habla algún idioma ancestral:</strong></label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="idiomaAncestral"
+                                                                                [checked]="personaLogeada.hablaIdiomaAncestral == 'true'"
+                                                                                disabled>Si</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="idiomaAncestral"
+                                                                                [checked]="personaLogeada.hablaIdiomaAncestral == 'false'"
+                                                                                disabled>No</label>
+                                        <label class="col-form-label ml-2 mr-2"><strong>Especifíque:</strong></label>
+                                        {{personaLogeada.idiomaAncestral}}
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>17. Fecha de Nacimiento
+                                            (Año-Mes-Día):</strong></label>
+                                        {{personaLogeada.fechaNacimiento | date:'yyyy-MM-dd'}}
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>18. Tipo de Sangre</strong></label>
+                                        {{tipoSangre}}
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>19. Pais de Nacionalidad</strong></label>
+                                        {{paisNacimiento}}
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>20. Provincia de
+                                            Nacimiento</strong></label>
+                                        {{provinciaNacimiento}}
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>21. Cantón de Nacimiento</strong></label>
+                                        {{cantonNacimiento}}
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>22. Categoría migratoria: (en caso de ser
+                                            extranjero)</strong></label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="categoriaMigratoria"
+                                                                                [checked]="personaLogeada.idCategoriaMigratoria == 1"
+                                                                                disabled>Residente permanente</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="categoriaMigratoria"
+                                                                                [checked]="personaLogeada.idCategoriaMigratoria == 2"
+                                                                                disabled>Residente transitorio o no
+                                            residente</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="categoriaMigratoria"
+                                                                                [checked]="personaLogeada.idCategoriaMigratoria == 3"
+                                                                                disabled>Residente temporal</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="categoriaMigratoria"
+                                                                                [checked]="personaLogeada.idCategoriaMigratoria == 4"
+                                                                                disabled>Refugiado</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>23. Pais de Residencia</strong></label>
+                                        {{paisDomicilio}}
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>24. Provincia de
+                                            Residencia</strong></label>
+                                        {{provinciaDomicilio}}
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>25. Cantón de Residencia</strong></label>
+                                        {{cantonDomicilio}}
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>26. Estado Civil</strong></label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="estadoCivil"
+                                                                                [checked]="personaLogeada.idEstadoCivil == 1"
+                                                                                disabled>Soltero/a</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="estadoCivil"
+                                                                                [checked]="personaLogeada.idEstadoCivil == 2"
+                                                                                disabled>Casado/a</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="estadoCivil"
+                                                                                [checked]="personaLogeada.idEstadoCivil == 5"
+                                                                                disabled>Unión Libre</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="estadoCivil"
+                                                                                [checked]="personaLogeada.idEstadoCivil == 3"
+                                                                                disabled>Divorciado/a</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="estadoCivil"
+                                                                                [checked]="personaLogeada.idEstadoCivil == 4"
+                                                                                disabled>Viudo/a</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>27. Tiene Alguna
+                                            Discapacidad</strong></label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="tieneDiscapacidad"
+                                                                                [checked]="personaLogeada.carnetConadis == 'true'"
+                                                                                disabled>Si</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="tieneDiscapacidad"
+                                                                                [checked]="personaLogeada.carnetConadis == 'false'"
+                                                                                disabled>No</label>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>28. Nro. Carnet CONADIS:</strong></label>
+                                        {{personaLogeada.numeroCarnetConadis}}
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>29. Porcentaje de
+                                            Discapacidad</strong></label>
+                                        {{personaLogeada.porcentajeDiscapacidad}}%
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>30. Tipo de Discapacidad</strong></label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="tipoDiscapacidad"
+                                                                                [checked]="personaLogeada.idTipoDiscapacidad == 1"
+                                                                                disabled>Auditiva</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="tipoDiscapacidad"
+                                                                                [checked]="personaLogeada.idTipoDiscapacidad == 2"
+                                                                                disabled>Física</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="tipoDiscapacidad"
+                                                                                [checked]="personaLogeada.idTipoDiscapacidad == 6"
+                                                                                disabled>Visual</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="tipoDiscapacidad"
+                                                                                [checked]="personaLogeada.idTipoDiscapacidad == 3"
+                                                                                disabled>Intelectual</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="tipoDiscapacidad"
+                                                                                [checked]="personaLogeada.idTipoDiscapacidad == 4"
+                                                                                disabled>Lenguaje</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="tipoDiscapacidad"
+                                                                                [checked]="personaLogeada.idTipoDiscapacidad == 5"
+                                                                                disabled>Psicosocial</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>31. Tipo de Colegio</strong></label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="tipoColegio"
+                                                                                [checked]="estudiante.idTipoInstitucionProcedencia == 1"
+                                                                                disabled>Fiscal</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="tipoColegio"
+                                                                                [checked]="estudiante.idTipoInstitucionProcedencia == 2"
+                                                                                disabled>Fiscomisional</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="tipoColegio"
+                                                                                [checked]="estudiante.idTipoInstitucionProcedencia == 3"
+                                                                                disabled>Particular</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="tipoColegio"
+                                                                                [checked]="estudiante.idTipoInstitucionProcedencia == 4"
+                                                                                disabled>Municipal</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="tipoColegio"
+                                                                                [checked]="estudiante.idTipoInstitucionProcedencia == 5"
+                                                                                disabled>Extranjero</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>32. Tipo de Bachillerato</strong></label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="tipoBachillerato"
+                                                                                [checked]="estudiante.idTipoBachillerato == 1"
+                                                                                disabled>Técnico</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="tipoBachillerato"
+                                                                                [checked]="estudiante.idTipoBachillerato == 2"
+                                                                                disabled>Técnico Productivo</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="tipoBachillerato"
+                                                                                [checked]="estudiante.idTipoBachillerato == 3"
+                                                                                disabled>BGU</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="tipoBachillerato"
+                                                                                [checked]="estudiante.idTipoBachillerato == 4"
+                                                                                disabled>BI</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="tipoBachillerato"
+                                                                                [checked]="estudiante.idTipoBachillerato == 5"
+                                                                                disabled>Otro</label>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>33. Año de graduación</strong></label>
+                                        {{estudiante.anoGraduacion}}
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>34. Posee algún título de Educación
+                                            Superior:</strong></label>
+                                        <label class="radio-inline ml-2"><input type="radio"
+                                                                                name="poseeTituloEducacionSuperior"
+                                                                                [checked]="estudiante.poseeTituloEducacionSuperior == 'true'"
+                                                                                disabled>Si</label>
+                                        <label class="radio-inline ml-2"><input type="radio"
+                                                                                name="poseeTituloEducacionSuperior"
+                                                                                [checked]="estudiante.poseeTituloEducacionSuperior == 'false'"
+                                                                                disabled>No</label>
+                                        <label class="col-form-label ml-2 mr-2"><strong>Especifíque:</strong></label>
+                                        {{estudiante.tituloEducacionSuperior}}
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>35. Fecha en la que inició el estudiante
+                                            la Carrera:</strong></label>
+                                        {{estudiante.fechaInicioCarrrera | date:'y-MM-dd'}}
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>36. Fecha de Matrícula:</strong></label>
+                                        {{cupo.fecha | date:'y-MM-dd'}}
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>37. Tipo de Matricula</strong></label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="tipoMatricula"
+                                                                                [checked]="cupo.idTipoMatricula == 1"
+                                                                                disabled>Ordinaria</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="tipoMatricula"
+                                                                                [checked]="cupo.idTipoMatricula == 2"
+                                                                                disabled>Extraordinaria</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="tipoMatricula"
+                                                                                [checked]="cupo.idTipoMatricula == 3"
+                                                                                disabled>Especial</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>38. Período/Ciclo
+                                            Académico</strong></label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="periodoAcademico"
+                                                                                [checked]="periodoLectivo.ordinal == 1"
+                                                                                disabled>Primero (Mayo-Oct)</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="periodoAcademico"
+                                                                                [checked]="periodoLectivo.ordinal == 2"
+                                                                                disabled>Segundo (Nov- Abril)</label>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>39. Año del Período
+                                            Académico</strong></label>
+                                        {{periodoLectivo.fechaInicio | date:'y'}}
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>40. Nivel Académico</strong></label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="nivelAcademico"
+                                                                                [checked]="cupo.nivel == 1" disabled>1°</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="nivelAcademico"
+                                                                                [checked]="cupo.nivel == 2" disabled>2°</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="nivelAcademico"
+                                                                                [checked]="cupo.nivel == 3" disabled>3°</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="nivelAcademico"
+                                                                                [checked]="cupo.nivel == 4" disabled>4°</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="nivelAcademico"
+                                                                                [checked]="cupo.nivel == 5" disabled>5°</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="nivelAcademico"
+                                                                                [checked]="cupo.nivel == 6" disabled>6°</label>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>41. Paralelo (A-Z)</strong></label>
+                                        {{cupo.paralelo}}
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>42. Nombre de la Carrera</strong></label>
+                                        {{carrera.nombre}}
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>43. Título que otorga la Carrera</strong></label>
+                                        {{carrera.descripcion}}
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>44. Tipo de Carrera</strong></label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="tipoCarrera"
+                                                                                [checked]="carrera.idTipoCarrera == 1"
+                                                                                disabled>Tecnicatura</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="tipoCarrera"
+                                                                                [checked]="carrera.idTipoCarrera == 2"
+                                                                                disabled>Tecnología</label>
+                                    </div>
+                                </div>
+                            </td>
+                            <td colspan="2">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>45. Modalidad de la
+                                            Carrera</strong></label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="modalidadCarrera"
+                                                                                [checked]="carrera.idModalidadCarrera == 1"
+                                                                                disabled>Presencial</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="modalidadCarrera"
+                                                                                [checked]="carrera.idModalidadCarrera == 2"
+                                                                                disabled>Semipresencial</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="modalidadCarrera"
+                                                                                [checked]="carrera.idModalidadCarrera == 3"
+                                                                                disabled>Dual</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>46. Jornada en la que
+                                            Estudia</strong></label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="jornadaEstudia"
+                                                                                [checked]="datosCupo.idJornada == 1"
+                                                                                disabled>Matutina</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="jornadaEstudia"
+                                                                                [checked]="datosCupo.idJornada == 2"
+                                                                                disabled>Vespertina</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="jornadaEstudia"
+                                                                                [checked]="datosCupo.idJornada == 3"
+                                                                                disabled>Nocturna</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="jornadaEstudia"
+                                                                                [checked]="datosCupo.idJornada == 4"
+                                                                                disabled>Intensiva</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>47. Ha repetido al menos una
+                                            materia</strong></label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="repiteMaterias"
+                                                                                [checked]="estudiante.repetidoMateria == 'true'"
+                                                                                disabled>Si</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="repiteMaterias"
+                                                                                [checked]="estudiante.repetidoMateria == 'false'"
+                                                                                disabled>No</label>
+                                    </div>
+                                </div>
+                            </td>
+                            <td colspan="2">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>48. Ha Perdido la
+                                            Gratuidad</strong></label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="perdidoGratuidad"
+                                                                                [checked]="estudiante.perdidoGratuidad == 'true'"
+                                                                                disabled>Si</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="perdidoGratuidad"
+                                                                                [checked]="estudiante.perdidoGratuidad == 'false'"
+                                                                                disabled>No</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div #pieFormularioDatosPG1 class="row">
+                <div class="col-11">
+                    <div class="row mt-4">
+                        <div class="col-10"></div>
+                        <div class="col-2 text-right">
+                            Página 1 de 2
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 text-center mb-4">
+                            <img alt="SENESCYT" height="75px" src="assets/images/logos/senescyt.png"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div #cuerpoFormularioDatosPG2 class="row m-2">
+                <div class="col-11">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td colspan="2">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>49. Ha realizado Prácticas
+                                            Preprofesionales</strong></label>
+                                        <label class="radio-inline ml-2"><input type="radio"
+                                                                                name="realizadoPracticasPreprofesionales"
+                                                                                [checked]="estudiante.realizadoPracticasPreprofesionales == 'true'"
+                                                                                disabled>Si</label>
+                                        <label class="radio-inline ml-2"><input type="radio"
+                                                                                name="realizadoPracticasPreprofesionales"
+                                                                                [checked]="estudiante.realizadoPracticasPreprofesionales == 'false'"
+                                                                                disabled>No</label>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>50. Nro. Horas de Prácticas
+                                            Preprofesionales Realizadas</strong></label>
+                                        {{estudiante.horasPracticasPreprofesionales}}
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>51. Tipo de Institución en el que se
+                                            realiza Prácticas Pre profesionales</strong></label>
+                                        <label class="radio-inline ml-2"><input type="radio"
+                                                                                name="tipoInstitucionRealizaPracticas"
+                                                                                [checked]="estudiante.idTipoInstitucionPracticasPreprofesionales == 1"
+                                                                                disabled>Pública</label>
+                                        <label class="radio-inline ml-2"><input type="radio"
+                                                                                name="tipoInstitucionRealizaPracticas"
+                                                                                [checked]="estudiante.idTipoInstitucionPracticasPreprofesionales == 2"
+                                                                                disabled>Privada</label>
+                                        <label class="radio-inline ml-2"><input type="radio"
+                                                                                name="tipoInstitucionRealizaPracticas"
+                                                                                [checked]="estudiante.idTipoInstitucionPracticasPreprofesionales == 3"
+                                                                                disabled>Tercer Sector</label>
+                                        <label class="radio-inline ml-2"><input type="radio"
+                                                                                name="tipoInstitucionRealizaPracticas"
+                                                                                [checked]="estudiante.idTipoInstitucionPracticasPreprofesionales == 4"
+                                                                                disabled>Organismos
+                                            Internacionales</label>
+                                        <label class="radio-inline ml-2"><input type="radio"
+                                                                                name="tipoInstitucionRealizaPracticas"
+                                                                                [checked]="estudiante.idTipoInstitucionPracticasPreprofesionales == 5"
+                                                                                disabled>Otros</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label ml-2"><strong>52. Sector Económico en el que
+                                            realiza Prácticas Pre profesionales</strong></label>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="sectorEonomicoPracticas"
+                                                                                        [checked]="estudiante.idSectorEconomicoPracticasPreprofesionales == 1"
+                                                                                        disabled>Agricultura, ganadería,
+                                                    silvicultura y pesca</label><br/>
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="sectorEonomicoPracticas"
+                                                                                        [checked]="estudiante.idSectorEconomicoPracticasPreprofesionales == 2"
+                                                                                        disabled>Explotación de minas y
+                                                    canteras</label><br/>
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="sectorEonomicoPracticas"
+                                                                                        [checked]="estudiante.idSectorEconomicoPracticasPreprofesionales == 3"
+                                                                                        disabled>Industrias
+                                                    manufactureras</label><br/>
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="sectorEonomicoPracticas"
+                                                                                        [checked]="estudiante.idSectorEconomicoPracticasPreprofesionales == 4"
+                                                                                        disabled>Comercio, reparación
+                                                    vehículos, efectos personales y enseres domésticos</label><br/>
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="sectorEonomicoPracticas"
+                                                                                        [checked]="estudiante.idSectorEconomicoPracticasPreprofesionales == 5"
+                                                                                        disabled>Servicios</label><br/>
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="sectorEonomicoPracticas"
+                                                                                        [checked]="estudiante.idSectorEconomicoPracticasPreprofesionales == 6"
+                                                                                        disabled>Construcción</label><br/>
+                                            </div>
+                                            <div class="col-6">
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="sectorEonomicoPracticas"
+                                                                                        [checked]="estudiante.idSectorEconomicoPracticasPreprofesionales == 7"
+                                                                                        disabled>Hoteles y restaurantes</label><br/>
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="sectorEonomicoPracticas"
+                                                                                        [checked]="estudiante.idSectorEconomicoPracticasPreprofesionales == 8"
+                                                                                        disabled>Transporte,
+                                                    almacenamiento y comunicaciones</label><br/>
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="sectorEonomicoPracticas"
+                                                                                        [checked]="estudiante.idSectorEconomicoPracticasPreprofesionales == 9"
+                                                                                        disabled>Intermediación
+                                                    financiera</label><br/>
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="sectorEonomicoPracticas"
+                                                                                        [checked]="estudiante.idSectorEconomicoPracticasPreprofesionales == 10"
+                                                                                        disabled>Administración pública
+                                                    y defensa</label><br/>
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="sectorEonomicoPracticas"
+                                                                                        [checked]="estudiante.idSectorEconomicoPracticasPreprofesionales == 11"
+                                                                                        disabled>Enseñanza</label><br/>
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="sectorEonomicoPracticas"
+                                                                                        [checked]="estudiante.idSectorEconomicoPracticasPreprofesionales == 12"
+                                                                                        disabled>Servicios sociales y de
+                                                    salud</label><br/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>53. Ha participado en algún Proyecto de
+                                            Vinculación con la Sociedad en el Instituto</strong></label>
+                                        <label class="radio-inline ml-2"><input type="radio"
+                                                                                name="proyectoVinculacionSociedad"
+                                                                                [checked]="estudiante.participadoProyectoVinculacion == 'true'"
+                                                                                disabled>Si</label>
+                                        <label class="radio-inline ml-2"><input type="radio"
+                                                                                name="proyectoVinculacionSociedad"
+                                                                                [checked]="estudiante.participadoProyectoVinculacion == 'false'"
+                                                                                disabled>No</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>54. Cuál es el alcance del Proyecto de
+                                            Vinculación con la Sociedad</strong></label>
+                                        <label class="radio-inline ml-2"><input type="radio"
+                                                                                name="alcanceProyectoVinculacion"
+                                                                                [checked]="estudiante.idAlcanceProyectoVinculacion == 1"
+                                                                                disabled>Nacional</label>
+                                        <label class="radio-inline ml-2"><input type="radio"
+                                                                                name="alcanceProyectoVinculacion"
+                                                                                [checked]="estudiante.idAlcanceProyectoVinculacion == 2"
+                                                                                disabled>Provincial</label>
+                                        <label class="radio-inline ml-2"><input type="radio"
+                                                                                name="alcanceProyectoVinculacion"
+                                                                                [checked]="estudiante.idAlcanceProyectoVinculacion == 3"
+                                                                                disabled>Cantonal</label>
+                                        <label class="radio-inline ml-2"><input type="radio"
+                                                                                name="alcanceProyectoVinculacion"
+                                                                                [checked]="estudiante.idAlcanceProyectoVinculacion == 4"
+                                                                                disabled>Parroquial</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>55. El Estudiante se encuentra dedicado
+                                            a</strong></label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="estudianteDedicadoA"
+                                                                                [checked]="estudiante.idOcupacionEstudiante == 1"
+                                                                                disabled>Solamente al estudio</label>
+                                        <label class="radio-inline ml-2"><input type="radio" name="estudianteDedicadoA"
+                                                                                [checked]="estudiante.idOcupacionEstudiante == 2"
+                                                                                disabled>Alguna ocupación para obtener
+                                            ingresos</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>56. Cuál es el nombre de la empresa donde
+                                            labora</strong></label>
+                                        {{estudiante.nombreEmpresaTrabaja}}
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label ml-2"><strong>57. Indique cuál es el área de
+                                            trabajo de la empresa</strong></label>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="areaTrabajoEmpresa"
+                                                                                        [checked]="estudiante.idAreaEmpresaTrabaja == 1"
+                                                                                        disabled>Agricultura, ganadería,
+                                                    silvicultura y pesca</label><br/>
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="areaTrabajoEmpresa"
+                                                                                        [checked]="estudiante.idAreaEmpresaTrabaja == 2"
+                                                                                        disabled>Explotación de minas y
+                                                    canteras</label><br/>
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="areaTrabajoEmpresa"
+                                                                                        [checked]="estudiante.idAreaEmpresaTrabaja == 3"
+                                                                                        disabled>Industrias
+                                                    manufactureras</label><br/>
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="areaTrabajoEmpresa"
+                                                                                        [checked]="estudiante.idAreaEmpresaTrabaja == 4"
+                                                                                        disabled>Comercio, reparación
+                                                    vehículos, efectos personales y enseres domésticos</label><br/>
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="areaTrabajoEmpresa"
+                                                                                        [checked]="estudiante.idAreaEmpresaTrabaja == 5"
+                                                                                        disabled>Servicios</label><br/>
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="areaTrabajoEmpresa"
+                                                                                        [checked]="estudiante.idAreaEmpresaTrabaja == 6"
+                                                                                        disabled>Construcción</label><br/>
+                                            </div>
+                                            <div class="col-6">
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="areaTrabajoEmpresa"
+                                                                                        [checked]="estudiante.idAreaEmpresaTrabaja == 7"
+                                                                                        disabled>Hoteles y restaurantes</label><br/>
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="areaTrabajoEmpresa"
+                                                                                        [checked]="estudiante.idAreaEmpresaTrabaja == 8"
+                                                                                        disabled>Transporte,
+                                                    almacenamiento y comunicaciones</label><br/>
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="areaTrabajoEmpresa"
+                                                                                        [checked]="estudiante.idAreaEmpresaTrabaja == 9"
+                                                                                        disabled>Intermediación
+                                                    financiera</label><br/>
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="areaTrabajoEmpresa"
+                                                                                        [checked]="estudiante.idAreaEmpresaTrabaja == 10"
+                                                                                        disabled>Administración pública
+                                                    y defensa</label><br/>
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="areaTrabajoEmpresa"
+                                                                                        [checked]="estudiante.idAreaEmpresaTrabaja == 11"
+                                                                                        disabled>Enseñanza</label><br/>
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="areaTrabajoEmpresa"
+                                                                                        [checked]="estudiante.idAreaEmpresaTrabaja == 12"
+                                                                                        disabled>Servicios sociales y de
+                                                    salud</label><br/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>58. Para qué emplea sus ingresos
+                                            económicos el estudiante</strong></label>
+                                        <label class="radio-inline ml-2"><input type="radio"
+                                                                                name="empleoIngresosEstudiante"
+                                                                                [checked]="estudiante.idDestinoRecursosEstudiante == 1"
+                                                                                disabled>Sostener sus estudios</label>
+                                        <label class="radio-inline ml-2"><input type="radio"
+                                                                                name="empleoIngresosEstudiante"
+                                                                                [checked]="estudiante.idDestinoRecursosEstudiante == 2"
+                                                                                disabled>Mantener a su familia</label>
+                                        <label class="radio-inline ml-2"><input type="radio"
+                                                                                name="empleoIngresosEstudiante"
+                                                                                [checked]="estudiante.idDestinoRecursosEstudiante == 3"
+                                                                                disabled>Otros</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>59. Usted o algún miembro de la familia
+                                            recibe el bono de desarrollo humano</strong></label>
+                                        <label class="radio-inline ml-2"><input type="radio"
+                                                                                name="bonnoDesarrolloHumano"
+                                                                                [checked]="personaLogeada.bonoDesarrolloHumano == 'true'"
+                                                                                disabled>Si</label>
+                                        <label class="radio-inline ml-2"><input type="radio"
+                                                                                name="bonnoDesarrolloHumano"
+                                                                                [checked]="personaLogeada.bonoDesarrolloHumano == 'false'"
+                                                                                disabled>No</label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label ml-2"><strong>60. Nivel de Formación del
+                                            Padre</strong></label>
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="formacionPadre"
+                                                                                        [checked]="personaLogeada.idNivelEstudioPadre == 1"
+                                                                                        disabled>Ninguno</label><br/>
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="formacionPadre"
+                                                                                        [checked]="personaLogeada.idNivelEstudioPadre == 8"
+                                                                                        disabled>Educación
+                                                    Básica</label><br/>
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="formacionPadre"
+                                                                                        [checked]="personaLogeada.idNivelEstudioPadre == 4"
+                                                                                        disabled>Licenciatura</label><br/>
+                                            </div>
+                                            <div class="col-3">
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="formacionPadre"
+                                                                                        [checked]="personaLogeada.idNivelEstudioPadre == 9"
+                                                                                        disabled>Centro de
+                                                    Alfabetización</label><br/>
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="formacionPadre"
+                                                                                        [checked]="personaLogeada.idNivelEstudioPadre == 2"
+                                                                                        disabled>Secundaria</label><br/>
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="formacionPadre"
+                                                                                        [checked]="personaLogeada.idNivelEstudioPadre == 6 || personaLogeada.idNivelEstudioPadre == 7"
+                                                                                        disabled>Post Grado</label><br/>
+                                            </div>
+                                            <div class="col-3">
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="formacionPadre"
+                                                                                        [checked]="personaLogeada.idNivelEstudioPadre == 10"
+                                                                                        disabled>Jardín de
+                                                    Infantes</label><br/>
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="formacionPadre"
+                                                                                        [checked]="personaLogeada.idNivelEstudioPadre == 11"
+                                                                                        disabled>Educación Media</label><br/>
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="formacionPadre"
+                                                                                        [checked]="personaLogeada.idNivelEstudioPadre == 12"
+                                                                                        disabled>No Sabe / No vive con
+                                                    el Padre</label><br/>
+                                            </div>
+                                            <div class="col-3">
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="formacionPadre"
+                                                                                        [checked]="personaLogeada.idNivelEstudioPadre == 13"
+                                                                                        disabled>Primaria</label><br/>
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="formacionPadre"
+                                                                                        [checked]="personaLogeada.idNivelEstudioPadre == 3"
+                                                                                        disabled>Superior No
+                                                    Universitario</label><br/>
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="formacionPadre"
+                                                                                        [checked]="personaLogeada.idNivelEstudioPadre == 5"
+                                                                                        disabled>Ingeniería</label><br/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label ml-2"><strong>61. Nivel de Formación del
+                                            Madre</strong></label>
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="formacionMadre"
+                                                                                        [checked]="personaLogeada.idNivelEstudioMadre == 1"
+                                                                                        disabled>Ninguno</label><br/>
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="formacionMadre"
+                                                                                        [checked]="personaLogeada.idNivelEstudioMadre == 8"
+                                                                                        disabled>Educación
+                                                    Básica</label><br/>
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="formacionMadre"
+                                                                                        [checked]="personaLogeada.idNivelEstudioMadre == 4"
+                                                                                        disabled>Licenciatura</label><br/>
+                                            </div>
+                                            <div class="col-3">
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="formacionMadre"
+                                                                                        [checked]="personaLogeada.idNivelEstudioMadre == 9"
+                                                                                        disabled>Centro de
+                                                    Alfabetización</label><br/>
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="formacionMadre"
+                                                                                        [checked]="personaLogeada.idNivelEstudioMadre == 2"
+                                                                                        disabled>Secundaria</label><br/>
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="formacionMadre"
+                                                                                        [checked]="personaLogeada.idNivelEstudioMadre == 6 || personaLogeada.idNivelEstudioMadre == 7"
+                                                                                        disabled>Post Grado</label><br/>
+                                            </div>
+                                            <div class="col-3">
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="formacionMadre"
+                                                                                        [checked]="personaLogeada.idNivelEstudioMadre == 10"
+                                                                                        disabled>Jardín de
+                                                    Infantes</label><br/>
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="formacionMadre"
+                                                                                        [checked]="personaLogeada.idNivelEstudioMadre == 11"
+                                                                                        disabled>Educación Media</label><br/>
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="formacionMadre"
+                                                                                        [checked]="personaLogeada.idNivelEstudioMadre == 12"
+                                                                                        disabled>No Sabe / No vive con
+                                                    el Padre</label><br/>
+                                            </div>
+                                            <div class="col-3">
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="formacionMadre"
+                                                                                        [checked]="personaLogeada.idNivelEstudioMadre == 13"
+                                                                                        disabled>Primaria</label><br/>
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="formacionMadre"
+                                                                                        [checked]="personaLogeada.idNivelEstudioMadre == 3"
+                                                                                        disabled>Superior No
+                                                    Universitario</label><br/>
+                                                <label class="radio-inline ml-2"><input type="radio"
+                                                                                        name="formacionMadre"
+                                                                                        [checked]="personaLogeada.idNivelEstudioMadre == 5"
+                                                                                        disabled>Ingeniería</label><br/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>62. Ingresos del Hogar</strong></label>
+                                        {{ingresos}}
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="col-form-label"><strong>63. Número de Miembros del Hogar</strong></label>
+                                        {{personaLogeada.miembrosHogar}}
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div #pieFormularioDatosPG2 class="row">
+                <div class="col-11">
+                    <div class="row">
+                        <div class="col-8"></div>
+                        <div class="col-4" style="border-style: none none solid none;">
+                            <strong>FIRMA ESTUDIANTE:</strong>
+                            <div style="width: 100%; height: 75px; float:left;"></div>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-10"></div>
+                        <div class="col-2 text-right">
+                            Página 2 de 2
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 text-center mb-4">
+                            <img alt="SENESCYT" height="75px" src="assets/images/logos/senescyt.png"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 m-2">
+            <div class="form-group row">
+                <div style="width: 100%; text-align:center;">
+                    <div>
+                        <button type="button" class="btn btn-primary" (click)="imprimir()">
+                            <span class="fa fa-print"></span>&nbsp;Imprimir
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

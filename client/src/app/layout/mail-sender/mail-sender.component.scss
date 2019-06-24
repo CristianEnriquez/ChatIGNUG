@@ -1,0 +1,15 @@
+textarea {
+    resize: none;
+ }
+
+ .codeWriter {
+     background-color: #505759;
+     margin-top: 5px;
+     border: 1px solid black;
+     color: lime;
+     font-family: Tahoma, sans-serif;
+ }
+
+ .codeWriter::placeholder{
+     color:white;
+ }

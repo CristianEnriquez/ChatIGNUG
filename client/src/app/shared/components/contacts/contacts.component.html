@@ -1,0 +1,128 @@
+<!-- Salas -->
+<nav *ngIf="refreshContactVisibleState()" class="chatspace" [ngClass]="{sidebarPushRight: isActive}">
+    <ul class="list-group">
+        <a *ngFor="let sala of salas" class="list-group-item">
+            <span class="fa fa-th-list" title="Mostrar Contactos" (click)="mostrarContactos(contactList, sala.miembros)"></span>
+            <span
+                style="font-size: 10px;">&nbsp;
+                <a (click)="salaSeleccionada(sala.idSala)" class="list-group-item" (click)="chatVentana.getMessages()">
+                    {{sala.nombre}}
+                </a>
+            </span>&nbsp;
+            <span *ngIf="sala.mensajesNuevos !== 0" class="badge badge-pill badge-info">{{sala.mensajesNuevos}}</span>
+        </a>
+    </ul>
+</nav>
+<!-- Componente hijo -->
+<app-chatspace #chatVentana></app-chatspace>
+<!-- Ventana modal-->
+<ng-template #contactList let-="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">
+            Contactos en la Sala
+        </h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('ClickEnX')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-4">
+                <div style="width: 100%; height: 500px; overflow-x: hidden; overflow-y: auto;">
+                    <table class="table table-striped table-bordered">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>
+                                </th>
+                                <th scope="col">
+                                    <span>
+                                        <strong>Nombre Completo</strong>
+                                    </span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let actual of miembrosSeleccionado" (click)="onSelect(actual)">
+                                <td>
+                                    <i class="fa fa-hand-o-right" [hidden]="!estaSeleccionado(actual)"></i>
+                                </td>
+                                <td>{{actual.nombreCompleto}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="row" *ngIf="miembroSeleccionado !== null">
+                    <div class="col-12">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th>
+                                        Nombre Completo:
+                                    </th>
+                                    <td>
+                                        {{miembroSeleccionado.nombreCompleto}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        Celular:
+                                    </th>
+                                    <td>
+                                        {{personaSolicitada.telefonoCelular}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        Tel Domicilio:
+                                    </th>
+                                    <td>
+                                        {{personaSolicitada.telefonoDomicilio}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        Correo Institucional:
+                                    </th>
+                                    <td>
+                                        <a href="mailto:{{personaSolicitada.correoElectronicoInstitucional}}">{{personaSolicitada.correoElectronicoInstitucional}}</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        Correo Personal:
+                                    </th>
+                                    <td>
+                                        <a href="mailto:{{personaSolicitada.correoElectronicoPersonal}}">{{personaSolicitada.correoElectronicoPersonal}}</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        Contacto de Emergencia:
+                                    </th>
+                                    <td>
+                                        {{personaSolicitada.nombreContactoEmergencia}} /
+                                        {{personaSolicitada.parentescoContactoEmergencia}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        Teléfono de Contacto de Emergencia:
+                                    </th>
+                                    <td>
+                                        {{personaSolicitada.telefonoContactoEmergencia}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="col-12 text-center">
+                            <img class="rounded mt-5" src="{{srcFotoPersonaSeleccionada}}" width="200px" height="200px">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</ng-template>

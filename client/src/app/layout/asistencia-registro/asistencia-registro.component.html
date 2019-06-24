@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 text-right">
+      <h2 style="margin-top:0px">Registro de Asistencias</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="btn-toolbar">
+        <div>
+          <button type="button" class="btn btn-default" (click)="refresh()">
+            <span class="fa fa-refresh"></span>&nbsp;Leer
+          </button>
+          <button type="button" class="btn btn-primary" (click)="update()">
+            <span class="fa fa-save"></span>&nbsp;Guardar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="asignatura" class="col-sm-2 col-form-label">Asignatura</label>
+    <div class="col-sm-10">
+      <select id="asignatura" class="form-control" [ngModel]="asignaturaActual" (change)="onChangeAsignatura($event.target.value)">
+        <option *ngFor='let asignatura of asignaturas' [ngValue]="asignatura">{{asignatura.nombre}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="row" style="margin-top:15px">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">
+              <span>
+              </span>
+            </th>
+            <th scope="col" *ngFor="let itemCabecera of cabecerasMes" [attr.colspan]="itemCabecera.numeroColumnas">
+              <span>
+                <strong>{{itemCabecera.nombreMes}}</strong>
+              </span>
+            </th>
+          </tr>
+          <tr>
+            <th scope="col">
+              <span>
+                <strong>Estudiante</strong>
+              </span>
+            </th>
+            <th scope="col" *ngFor="let itemAsistencia of asistencias[0].asistencias">
+              <span>
+                <strong>{{itemAsistencia.fecha | date:'d'}}</strong>
+              </span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let asistencia of asistencias">
+            <td>{{asistencia.estudiante}}</td>
+            <td *ngFor="let dato of asistencia.asistencias">
+              <input type="number" min="0" [(ngModel)]="dato.horas" class="form-control">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

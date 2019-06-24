@@ -1,0 +1,224 @@
+<div class="container">
+    <div class="row">
+       <div class="col-md-12 text-right">
+          <h2 style="margin-top:0px">Envio de Correos Electrónicos</h2>
+       </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mb-3">
+                <div class="card-header">Remitente</div>
+                <div class="card-block">
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-2">
+                            <label class="col-form-label">Alias</label>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-10">
+                            <input type="text" class="form-control" id="FromAlias" placeholder="Alias" [(ngModel)]="mailData.FromAlias">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-2">
+                            <label class="col-form-label">Correo Electrónico</label>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-10">
+                            <input type="mail" class="form-control" id="FromEmail" placeholder="Correo Electrónico" [(ngModel)]="mailData.FromEmail">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-2">
+                            <label class="col-form-label">Contraseña</label>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-10">
+                            <input type="password" class="form-control" id="FromClave" placeholder="Contraseña" [(ngModel)]="mailData.FromClave">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mb-3">
+                <div class="card-header">Responder a</div>
+                <div class="card-block">
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-2">
+                            <label class="col-form-label">Alias</label>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-10">
+                            <input type="text" class="form-control" id="ReplyAlias" placeholder="Alias" [(ngModel)]="mailData.ReplyAlias">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-2">
+                            <label class="col-form-label">Correo Electrónico</label>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-10">
+                            <input type="mail" class="form-control" id="ReplyEmail" placeholder="Correo Electrónico" [(ngModel)]="mailData.ReplyEmail">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mb-3">
+                <div class="card-header">Mensaje</div>
+                <div class="card-block">
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-2">
+                            <label class="col-form-label">Asunto</label>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-10">
+                            <input type="text" class="form-control" id="Asunto" placeholder="Asunto" [(ngModel)]="mailData.Asunto">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card mb-3">
+                                        <div class="card-header">Cuerpo</div>
+                                        <div class="card-block">
+                                            <div class="btn-group-sm" role="group">
+                                                <button *ngFor="let comodin of Comodines" type="button" class="btn btn-secondary" (click)="insertarComodin(comodin)">
+                                                    {{comodin}}
+                                                </button>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                    <textarea class="form-control codeWriter" rows="20" id="Body" placeholder="Cuerpo" [(ngModel)]="mailData.Mensaje" (keyup)="cambioCuerpo()"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card mb-3">
+                                        <div class="card-header">Vista Previa</div>
+                                        <div class="card-block">
+                                            <div class="form-group row">
+                                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="previewBody"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mb-3">
+                <div class="card-header">Destino</div>
+                <div class="card-block">
+                    <div class="form-group row">
+                        <div class="col-xs-1 col-sm-1 col-md-2 col-lg-2" ></div>
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3" >
+                            <label class="col-form-label">Enviar por Estado</label>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-5 col-lg-5">
+                            <select class="form-control" id="idEstado" [(ngModel)]="estadoSeleccionadoCombo" (change)="filtroSeleccionado()">
+                                <option value="0" selected>Matriculados</option>
+                                <option value="1" selected>Cupo Asignado</option>
+                                <option value="2" selected>Contactados</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-1 col-sm-1 col-md-2 col-lg-2" ></div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-1 col-sm-1 col-md-2 col-lg-2" ></div>
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3" >
+                            <label class="col-form-label">Enviar por Carrera</label>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-5 col-lg-5">
+                            <select class="form-control" id="idCarrera" [(ngModel)]="carreraSeleccionadaCombo" (change)="filtroSeleccionado()">
+                                <option value="0" selected>Todas</option>
+                                <option *ngFor="let carrera of carreras" value={{carrera.id}}>{{carrera.nombre}}</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-1 col-sm-1 col-md-2 col-lg-2" ></div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-1 col-sm-1 col-md-2 col-lg-2" ></div>
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3" >
+                            <label class="col-form-label">Enviar por Nivel</label>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-5 col-lg-5">
+                            <select class="form-control" id="idNivel" [(ngModel)]="nivelSeleccionadoCombo" (change)="filtroSeleccionado()">
+                                <option value="0" selected>Todos</option>
+                                <option value="1" selected>Primer Nivel</option>
+                                <option value="2" selected>Segundo Nivel</option>
+                                <option value="3" selected>Tercer Nivel</option>
+                                <option value="4" selected>Cuarto Nivel</option>
+                                <option value="5" selected>Quinto Nivel</option>
+                                <option value="6" selected>Sexto Nivel</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-1 col-sm-1 col-md-2 col-lg-2" ></div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-1 col-sm-1 col-md-2 col-lg-2" ></div>
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3" >
+                            <label class="col-form-label">Tipo Destino</label>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-5 col-lg-5">
+                            <select class="form-control" id="alInstitucional" [(ngModel)]="alInstitucional">
+                                <option value="0" selected>Correo Personal</option>
+                                <option value="1" selected>Correo Institucional</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-1 col-sm-1 col-md-2 col-lg-2" ></div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-1 col-sm-1 col-md-2 col-lg-2" ></div>
+                        <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3" >
+                            <label class="col-form-label">DESTINATARIOS:</label>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-5 col-lg-5">
+                            <h2>{{total}}</h2>Máximo 500 envíos por día. Enviados hoy: <strong>{{enviosRealizados}}</strong>.
+                        </div>
+                        <div class="col-xs-1 col-sm-1 col-md-2 col-lg-2" ></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mb-3">
+                <div class="card-header">Enviar</div>
+                <div class="card-block">
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                            <button type="button" [ngClass]='{disabled: enviando}' class="btn btn-info" (click)="sendMails()">
+                                <span class="fa fa-send"></span>&nbsp;Iniciar
+                            </button>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <ngb-progressbar type="success" [value]="progresoPorcentaje" [striped]="true" [animated]="true"><i>{{mensajeBarra}}</i></ngb-progressbar>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <label class="col-form-label">{{tiempoRequerido}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

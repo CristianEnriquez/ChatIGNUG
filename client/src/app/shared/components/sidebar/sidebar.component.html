@@ -1,0 +1,388 @@
+<nav class="sidebar" [ngClass]="{sidebarPushRight: isActive}">
+    <ul class="list-group">
+        <a routerLink="/yavirac" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-dashboard"></i>&nbsp;{{ 'Yavirac' | translate }}
+        </a>
+        <a [routerLink]="['/charts']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-bar-chart-o"></i>&nbsp;{{ 'Cuadros' | translate }}
+        </a>
+        <div class="nested-menu" [hidden]="!rolMatriculacion">
+            <a class="list-group-item" (click)="addExpandClass('matriculacion')">
+                <span>
+                    <i class="fa fa-plus"></i>&nbsp; {{ 'Matriculación' | translate }}</span>
+            </a>
+            <li class="nested" [class.expand]="showMenu === 'matriculacion'">
+                <ul class="submenu">
+                    <li>
+                        <a [routerLink]="['/matrices']" [routerLinkActive]="['router-link-active']" class="list-group-item" [hidden]="!tutor">
+                            {{ 'Matrices SNIESE' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/periodolectivo']" [routerLinkActive]="['router-link-active']" class="list-group-item" [hidden]="!vicerector">
+                            {{ 'Período Lectivo' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/asignacion-asignaturas-cupo']" [routerLinkActive]="['router-link-active']" class="list-group-item" [hidden]="!coordinador">
+                            {{ 'Asignación Asignaturas Cupo' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/contacto-estudiantes-nuevos']" [routerLinkActive]="['router-link-active']" class="list-group-item" [hidden]="!tutor">
+                            {{ 'Contacto a Estudiantes Nuevos' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/mail-sender']" [routerLinkActive]="['router-link-active']" class="list-group-item" [hidden]="!tutor">
+                            {{ 'Envio Correos Electrónicos' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/solicitud-matricula']" [routerLinkActive]="['router-link-active']" class="list-group-item" [hidden]="!estudiante">
+                            {{ 'Solicitud de Matrícula' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/formulario-datos']" [routerLinkActive]="['router-link-active']" class="list-group-item" [hidden]="!estudiante">
+                            {{ 'Formulario de Datos' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/secretaria-academica']" [routerLinkActive]="['router-link-active']" class="list-group-item" [hidden]="!secretariaAcademica">
+                            {{ 'Generación de Certificados de Matrícula' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/certificado-matricula']" [routerLinkActive]="['router-link-active']" class="list-group-item" [hidden]="!secretariaAcademica">
+                            {{ 'Información de Estudiantes' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/tutor']" [routerLinkActive]="['router-link-active']" class="list-group-item" [hidden]="!tutor">
+                            {{ 'Tutor de Matriculación' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/asignacion-materias']" [routerLinkActive]="['router-link-active']" class="list-group-item" [hidden]="!tutor">
+                            {{ 'Asignación de Asignaturas' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/asignacion-roles']" [routerLinkActive]="['router-link-active']" class="list-group-item" [hidden]="!vicerector">
+                            {{ 'Roles de Matriculación' | translate }} </a>
+                    </li>
+                </ul>
+            </li>
+        </div>
+        <div class="nested-menu" [hidden]="!estudiante">
+            <a class="list-group-item" (click)="addExpandClass('pages5')">
+                <span><i class="fa fa-plus"></i>&nbsp; {{ 'RECURSOS IMPORTANTES' | translate }}</span>
+            </a>
+            <li class="nested" [class.expand]="showMenu === 'pages5'">
+                <ul class="submenu">
+                    <li>
+                        <a href="http://yavirac.edu.ec/ignug/RECURSOS/SOLICITUD%20DE%20ANULACION%20DE%20MATRICULA.docx" download class="list-group-item">
+                            <span><i class="fa fa-file-word-o"></i></span>&nbsp;{{ 'SOLICITUD DE ANULACIÓN DE MATRÍCULA' | translate }} </a>
+                    </li>
+                    <li>
+                        <a href="http://yavirac.edu.ec/ignug/RECURSOS/SOLICITUD%20DE%20CAMBIO%20DE%20JORNADA.docx" download class="list-group-item">
+                            <span><i class="fa fa-file-word-o"></i></span>&nbsp;{{ 'SOLICITUD DE CAMBIO DE JORNADA' | translate }} </a>
+                    </li>
+                    <li>
+                        <a href="http://yavirac.edu.ec/ignug/RECURSOS/SOLICITUD%20DE%20REINGRESO.docx" download class="list-group-item">
+                            <span><i class="fa fa-file-word-o"></i></span>&nbsp;{{ 'SOLICITUD DE REINGRESO' | translate }} </a>
+                    </li>
+                    <li>
+                        <a href="http://yavirac.edu.ec/ignug/RECURSOS/SOLICITUD%20DE%20TERCERA%20MATRICULA.docx" download class="list-group-item">
+                            <span><i class="fa fa-file-word-o"></i></span>&nbsp;{{ 'SOLICITUD DE TERCERA MATRÍCULA' | translate }} </a>
+                    </li>
+                </ul>
+            </li>
+        </div>
+        <div class="nested-menu" [hidden]="!secretariaAcademica">
+            <a class="list-group-item" (click)="addExpandClass('pages5')">
+                <span><i class="fa fa-plus"></i>&nbsp; {{ 'Asistencia' | translate }}</span>
+            </a>
+            <li class="nested" [class.expand]="showMenu === 'pages5'">
+                <ul class="submenu">
+                    <li>
+                        <a [routerLink]="['/asistencia-registro']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            {{ 'Registro' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/asistencia-justificacion']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            {{ 'Justificación' | translate }} </a>
+                    </li>
+                </ul>
+            </li>
+        </div>
+        <div class="nested-menu" [hidden]="!secretariaAcademica">
+            <a class="list-group-item" (click)="addExpandClass('pages1')">
+                <span>
+                    <i class="fa fa-plus"></i>&nbsp; {{ 'General' | translate }}</span>
+            </a>
+            <li class="nested" [class.expand]="showMenu === 'pages1'">
+                <ul class="submenu">
+                    <li>
+                        <a [routerLink]="['/asignatura']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            <i class="fa fa-users"></i>&nbsp;{{ 'Asignatura' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/asignaturasolicitudmatricula']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            <i class="fa fa-users"></i>&nbsp;{{ 'AsignaturaSolicitudMatricula' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/asistencia']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            <i class="fa fa-users"></i>&nbsp;{{ 'Asistencia' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/aulasasignaturas']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            <i class="fa fa-users"></i>&nbsp;{{ 'AulasAsignaturas' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/contacto']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            <i class="fa fa-users"></i>&nbsp;{{ 'Contacto' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/cupo']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            <i class="fa fa-users"></i>&nbsp;{{ 'Cupo' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/datosestudiante']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            <i class="fa fa-users"></i>&nbsp;{{ 'DatosEstudiante' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/detallenotas']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            <i class="fa fa-users"></i>&nbsp;{{ 'DetalleNotas' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/discapacidad']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            <i class="fa fa-users"></i>&nbsp;{{ 'Discapacidad' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/docente']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            <i class="fa fa-users"></i>&nbsp;{{ 'Docente' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/docenteasignatura']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            <i class="fa fa-users"></i>&nbsp;{{ 'DocenteAsignatura' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/estadopersona']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            <i class="fa fa-users"></i>&nbsp;{{ 'EstadoPersona' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/estadosolicitud']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            <i class="fa fa-users"></i>&nbsp;{{ 'EstadoSolicitud' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/estudiante']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            <i class="fa fa-users"></i>&nbsp;{{ 'Estudiante' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/experiencialaboral']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            <i class="fa fa-users"></i>&nbsp;{{ 'ExperienciaLaboral' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/horasclase']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            <i class="fa fa-users"></i>&nbsp;{{ 'HorasClase' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/institucion']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            <i class="fa fa-users"></i>&nbsp;{{ 'Institucion' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/jornadacarrera']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            <i class="fa fa-users"></i>&nbsp;{{ 'JornadaCarrera' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/matricula']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            <i class="fa fa-users"></i>&nbsp;{{ 'Matricula' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/matriculaasignatura']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            <i class="fa fa-users"></i>&nbsp;{{ 'MatriculaAsignatura' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/notas']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            <i class="fa fa-users"></i>&nbsp;{{ 'Notas' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/persona']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            <i class="fa fa-users"></i>&nbsp;{{ 'Persona' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/ponderacion']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            <i class="fa fa-users"></i>&nbsp;{{ 'Ponderacion' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/requisito']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            <i class="fa fa-users"></i>&nbsp;{{ 'Requisito' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/solicitudmatricula']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            <i class="fa fa-users"></i>&nbsp;{{ 'SolicitudMatricula' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/tiporequisito']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            <i class="fa fa-users"></i>&nbsp;{{ 'TipoRequisito' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/titulo']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            <i class="fa fa-users"></i>&nbsp;{{ 'Titulo' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/tutorcarrera']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            <i class="fa fa-users"></i>&nbsp;{{ 'TutorCarrera' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/ubicacion']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            <i class="fa fa-users"></i>&nbsp;{{ 'Ubicacion' | translate }} </a>
+                    </li>
+                </ul>
+            </li>
+        </div>
+        <div class="nested-menu" [hidden]="!secretariaAcademica">
+            <a class="list-group-item" (click)="addExpandClass('pages2')">
+                <span>
+                    <i class="fa fa-plus"></i>&nbsp; {{ 'De lo académico' | translate }}</span>
+            </a>
+            <li class="nested" [class.expand]="showMenu === 'pages2'">
+                <ul class="submenu">
+                    <li>
+                        <a [routerLink]="['/tipoaula']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            {{ 'Tipo de aula' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/aula']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            {{ 'Aula' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/instituto']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            {{ 'Instituto' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/modalidad']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            {{ 'Modalidad' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/carrera']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            {{ 'Carrera' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/categorianota']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            {{ 'Categoría Nota' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/tipoeducacioncontinua']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            {{ 'Tipo educación continua' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/educacioncontinua']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            {{ 'Educación continua' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/jornada']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            {{ 'Jornada' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/documento']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            {{ 'Documento' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/malla']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            {{ 'Malla' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/niveltitulo']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            {{ 'Nivel del título' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/paralelo']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            {{ 'Paralelo' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/parcial']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            {{ 'Parcial' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/periodoacademico']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            {{ 'PeriodoAcademico' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/periodolectivo']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            {{ 'PeriodoLectivo' | translate }} </a>
+                    </li>
+                </ul>
+            </li>
+        </div>
+        <div class="nested-menu" [hidden]="!secretariaAcademica">
+            <a class="list-group-item" (click)="addExpandClass('pages3')">
+                <span>
+                    <i class="fa fa-plus"></i>&nbsp; {{ 'De la persona' | translate }}</span>
+            </a>
+            <li class="nested" [class.expand]="showMenu === 'pages3'">
+                <ul class="submenu">
+                    <li>
+                        <a [routerLink]="['/enfermedad']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            {{ 'Enfermedad' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/estado']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            {{ 'Estado' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/estadocivil']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            {{ 'Estado civil' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/etnia']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            {{ 'Etnia' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/genero']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            <i class="fa fa-venus-mars"></i>&nbsp;{{ 'Género' | translate }}
+                        </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/hobbies']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            {{ 'Hobbies' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/motivosalida']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            {{ 'Motivo de salida' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/ocupacion']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            {{ 'Ocupación' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/tipodiscapacidad']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            <i class="fa fa-wheelchair"></i>&nbsp;{{ 'Discapacidad' | translate }}
+                        </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/tipoingresos']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            {{ 'Tipo de ingresos' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/tipoinstitucionprocedencia']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            {{ 'Tipo de institución de procedencia' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/tiposangre']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            {{ 'Tipo de sangre' | translate }} </a>
+                    </li>
+                </ul>
+            </li>
+        </div>
+        <div class="nested-menu" [hidden]="!secretariaAcademica">
+            <a class="list-group-item" (click)="addExpandClass('pages4')">
+                <span>
+                    <i class="fa fa-plus"></i>&nbsp; {{ 'De las seguridades' | translate }}</span>
+            </a>
+            <li class="nested" [class.expand]="showMenu === 'pages4'">
+                <ul class="submenu">
+                    <li>
+                        <a [routerLink]="['/cuenta']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            <i class="fa fa-users"></i>&nbsp;{{ 'Cuenta' | translate }} </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/roles']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                            <i class="fa fa-users"></i>&nbsp;{{ 'Roles' | translate }} </a>
+                    </li>
+                </ul>
+            </li>
+        </div>
+    </ul>
+</nav>
